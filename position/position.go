@@ -39,7 +39,7 @@ func GetAmount1(amount0 float64, price float64, minPrice float64, maxPrice float
 
 // Get amount0 if you have the amount1, current price, min price and max price range
 func GetAmount0(amount1 float64, price float64, minPrice float64, maxPrice float64) float64 {
-	l1 := GetLiquidity1(amount1, price, minPrice)
+	l1 := GetLiquidity1(amount1, minPrice, price)
 	return l1 * (math.Sqrt(maxPrice) - math.Sqrt(price)) / (math.Sqrt(price) * math.Sqrt(maxPrice))
 }
 
@@ -65,8 +65,8 @@ func GetLiquidity0(amount0, price, maxPrice float64) float64 {
 	return (amount0 * math.Sqrt(price) * math.Sqrt(maxPrice)) / (math.Sqrt(maxPrice) - math.Sqrt(price))
 }
 
-func GetLiquidity1(amount1, price, minPrice float64) float64 {
-	return amount1 / (math.Sqrt(minPrice) - math.Sqrt(price))
+func GetLiquidity1(amount1, minPrice, price float64) float64 {
+	return amount1 / (math.Sqrt(price) - math.Sqrt(minPrice))
 }
 
 // If you have an open position, calculate the liquidity0 open
